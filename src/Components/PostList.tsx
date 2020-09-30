@@ -3,6 +3,9 @@ import {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {fetchPosts} from '../Actions';
 
+
+import UserHeader from './UserHeader';
+
 const PostList = ( prop : any ) => {
 
     useEffect(
@@ -15,9 +18,36 @@ const PostList = ( prop : any ) => {
         
     )
 
+    const renderList = () => {
+        if (prop.posts && prop.posts.length > 0 ){
+            return prop.posts.map(
+                (post : any) : any=>{
+                    return (
+                        <div className="item" key={post.id}>
+                            <i className="large middle aligned icon user" />
+                            <div className="content">
+                                <div className="description">
+                                    <h2> {post.title} </h2>
+                                    <p> {post.body} </p>
+                                </div>
+                                <UserHeader userID={post.userID}/>
+                            </div>
+                        </div>
+                    )
+                }
+            )}
+        else {
+            return 'Loading . . . Please Wait';
+        }
+
+    }
+
+
+
+
     return (
-        <div>
-            PostList
+        <div className="ui relaxed divided list">
+            {renderList()}
         </div>
     )
 }
