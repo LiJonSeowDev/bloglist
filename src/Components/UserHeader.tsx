@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import {connect} from 'react-redux';
-import {fetchUser} from '../Actions'
+import {fetchUsers} from '../Actions'
 
 const UserHeader = (prop : any) => {
 
@@ -10,17 +10,17 @@ const UserHeader = (prop : any) => {
             if(!prop.users){
                 prop.fetchUser(prop.userID)
             }
-            console.log(prop.users);
+            console.log(prop.userName);
         }, [prop])
 
     const renderUser = () => {
-        if(prop.users){
+        if(prop.userName){
             return(
-            <div> {prop.users} </div>
+            <div> {`USER : ${prop.userName}`} </div>
             )
         }
         else{
-            return <div> Loading . . . User</div>
+            return <div> Loading . . . User </div>
         }
     }
 
@@ -37,6 +37,6 @@ const mapStateToProps = (state : any) =>{
 };
 
 
-export default connect(mapStateToProps, {fetchUser})(UserHeader);
+export default connect(mapStateToProps, {fetchUsers})(UserHeader);
 
 

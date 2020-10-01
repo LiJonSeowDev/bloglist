@@ -7,7 +7,7 @@ export default
     case  
         'FETCH_POST':
         {
-            return action.payload;
+            return [...state, action.payload]
         }
         default :
         {

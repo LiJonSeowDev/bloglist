@@ -12,9 +12,15 @@ const fetchPosts = () => {
 };
 
 
-const fetchUser = () => {
-    return async (dispatch  : any , id : number) => {
-        const response = await JSONPlaceholder.get(`/users/${id}`);
+
+const fetchUsers = (id : number) => {
+
+    const getId = () =>{
+        return id;
+    }
+
+    return async (dispatch  : any , state : any , getID = getId ) => {
+        const response = await JSONPlaceholder.get(`/users/${getID()}`);
 
         dispatch({
             type : 'FETCH_USER',
@@ -23,4 +29,4 @@ const fetchUser = () => {
     }
 }
 
-export {fetchPosts , fetchUser};
+export {fetchPosts , fetchUsers};

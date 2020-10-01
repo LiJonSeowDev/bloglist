@@ -1,5 +1,9 @@
+interface UsersDict<TValue> {
+    [key: string]: TValue;
+}
+
 export default 
-    (state = null, // defaulting state to null for initial values
+    (state : UsersDict<boolean> = {} , // defaulting state to null for initial values
     action : any) => {
     
 
@@ -7,7 +11,13 @@ export default
     case  
         'FETCH_USER':
         {
-            return action.payload;
+            if (state[action.payload.id]){ return state}
+            else {
+                let newState = {...state};
+                newState[action.payload.id] = action.payload.username;
+
+                return newState;
+            }
         }
         default :
         {
